@@ -1,0 +1,73 @@
+
+
+<div>
+  <mat-table
+       [dataSource]="dataSource" multiTemplateDataRows
+       class="mat-elevation-z8 grid-table" matSort (matSortChange)="onSortChange($event)" matSortDisableClear>
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <img *ngIf="column === 'name'" src="{{element.icon}}" class="img"/>
+        <span *ngIf="column != 'price' && column != 'marketCap' && column != 'volume' && column != 'availableSupply'" (click)="column === 'name' ? getMarketData(element) : ''" [ngClass]="{'txtRed' : element[column] < 0 && (column === 'priceChange1d' || column === 'priceChange1h' || column === 'priceChange1w'), 'txtGreen' : element[column] >= 0 && (column === 'priceChange1d' || column === 'priceChange1h' || column === 'priceChange1w')}">{{element[column]}}</span>
+        <span *ngIf="column == 'price' || column == 'marketCap' || column == 'volume'">${{element[column] | number : '1.2-2' }}</span>
+        <span *ngIf="column == 'availableSupply'">{{element[column] | number : '1.2-2' }}</span>
+        <span *ngIf="column === 'name'">&nbsp;({{element.symbol}})</span>
+        <span *ngIf="column === 'priceChange1d' || column === 'priceChange1h' || column === 'priceChange1w'" [ngClass]="{'txtRed' : element[column] < 0, 'txtGreen' : element[column] >= 0}">%</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let element">
+        <div class="example-element-detail"
+            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="grid-body">
+            <div class="rank">
+              <p>{{element.rank}}</p>
+              <p>RANK</p>
+            </div>
+            <div class="d-flex-item-center"> 
+              <img src="{{element.icon}}" class="img"/>
+              <span class=""> 
+                {{element.name}} ({{element.symbol}})
+              </span>
+            </div>
+            <div>
+              Total Supply : {{element.totalSupply | number : '1.2-2'}}
+            </div>
+            <div>
+              <a class="website-color" href="{{element.websiteUrl}}" target="_blank">Website </a>
+              <a class="twitter-color" href="{{element.twitterUrl}}" target="_blank">Twitter </a>
+            </div>
+            
+            <!-- <span class="example-element-description-attribution"> -- Shubham </span> -->
+          </div>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row *matRowDef="let element; columns: columnsToDisplay;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </mat-row>
+  <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
+</mat-table>
+
+
+  <div class="ml-15 mr-15">
+    <mat-paginator #paginator
+                class="demo-paginator"
+                (page)="handlePageEvent($event)"
+                [length]="length"
+                [pageSize]="pageSize"
+                [disabled]="disabled"
+                [showFirstLastButtons]="showFirstLastButtons"
+                [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+                [hidePageSize]="hidePageSize"
+                [pageIndex]="pageIndex"
+                aria-label="Select page">
+    </mat-paginator>
+  </div>
+
+</div>

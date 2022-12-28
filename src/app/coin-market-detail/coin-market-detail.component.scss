@@ -1,0 +1,76 @@
+.img { 
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .header{
+    padding: 15px 15px 15px 10px;
+    border-bottom: 1px solid #7A7A7A;
+    & .mat-icon {
+      font-size: 22px;
+    }
+  }
+
+  a:link, a:visited {
+    background-color: rgb(24, 198, 131) !important;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 25px;
+  }
+
+  .container{
+    padding:0.01em 16px;
+  }
+
+  .container:after,.container:before{
+    content:"";
+    display:table;
+    clear:both
+  }
+
+  .redContainer{
+    color:#fff!important;
+    background-color:#4c74cc!important;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .d-flex-item-center{
+    display: flex;
+    align-items: center;
+  }
+
+  .coin-market-table{
+    width: 100%;
+  }
+
+  .rank{
+    background: rgb(24, 198, 131);
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    position: relative;
+    text-align: center;
+    padding: 1rem;
+    width: auto;
+    display: inline-block;
+    color: white;
+    box-shadow: rgb(0 0 0 / 40%) 0px 2px 15px -3px;
+  }
+
+  .rank::before {
+    content: "";
+    width: calc(100% + 20px);
+    height: 10px;
+    background: inherit;
+    position: absolute;
+    left: -10px;
+    top: 0px;
+    border-radius: 8px;
+  }

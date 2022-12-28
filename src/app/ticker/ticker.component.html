@@ -1,0 +1,11 @@
+<marquee>
+    <div class="container">
+        <mat-card class="card" *ngFor="let item of cardList">
+            <mat-card-content>
+                <p><span class="title">Exchange Name :</span> {{item.exchange}}</p>
+                <p><span class="title">Price :</span> ${{item.price | number : '1.1-2'}}</p>
+                <p><span class="title">Pairing :</span> {{item.from}}-{{item.to}}</p>
+            </mat-card-content>
+        </mat-card>
+    </div> 
+</marquee>
